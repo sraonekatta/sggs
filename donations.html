@@ -481,6 +481,20 @@
       font-size: 1.2rem;
     }
 
+    .copy-message {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #333;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 4px;
+    opacity: 0;
+    transition: opacity 1s ease;
+    pointer-events: none;
+    font-size: 14px;
+}
+
       
     </style>
   </head>
@@ -688,6 +702,7 @@
                   <i class="fas fa-copy copy-icon" onclick="copyField('Bhagat Nagar, Karimnagar - 505001')" title="Copy Address"></i>
                 </li>
               </ul>
+              <div id="copyMsg" class="copy-message">Copied!</div>
             </div>
           </div>
 
@@ -781,6 +796,16 @@
           navbar.classList.remove('navbar-scrolled');
         }
       });
+      function copyField(text) {
+        navigator.clipboard.writeText(text).then(() => {
+            let msg = document.getElementById("copyMsg");
+            msg.style.opacity = "1";
+
+            setTimeout(() => {
+                msg.style.opacity = "0";
+            }, 1500); // fade-out delay
+        });
+      }
     </script>
   </body>
 </html>
